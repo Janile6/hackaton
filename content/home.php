@@ -17,7 +17,7 @@ if(isset($_SESSION['idU']))
 	}
 	else
 	{
-		$page = "application" ;
+		$page = "all" ;
 	}
 	?>
 	<!DOCTYPE html>
@@ -25,7 +25,7 @@ if(isset($_SESSION['idU']))
 	<head>
 		<title>Transfer</title>
 		<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
-		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+		<!-- <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"> -->
 		<link rel="stylesheet" type="text/css" href="../css/style.css">
 		<!-- <link rel="stylesheet" type="text/css" href="fontawesome/css/fontawesome.css"> -->
 		<link rel="stylesheet" type="text/css" href="../css/fontawesome/css/all.css">

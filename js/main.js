@@ -1,10 +1,10 @@
 function callSendedFile(u,r)
 {
-
   var data = new FormData() ;
   data.append('idU', u);
-  data.append('receiver', r) ;
-  data.append('type','') ;
+  data.append('receiver', r.value) ;
+  data.append('type','send') ;
+  data.append('target',r.options[r.selectedIndex].text)
   var xhr = new XMLHttpRequest() ;
   xhr.onreadystatechange = function()
   {
@@ -14,7 +14,7 @@ function callSendedFile(u,r)
       document.querySelector('.labelAll').innerHTML = 'sended' ;
       document.querySelector('.mySended').innerHTML = response[0] ;
       document.querySelector('.compteSend').innerHTML = JSON.parse(response[1])[0].nbr ;
-      // downloadFile()
+// downloadFile()
     }
   }
   xhr.open('POST','../back/showSendedFile.php') ;
@@ -147,8 +147,8 @@ if(selectedFile !== null)
   selectedFile.addEventListener('change', function(e){
     e.preventDefault() ;
     var idU = document.querySelector('.idU').value;
-    var receiver = document.querySelector('.receiver').value;
-    if(receiver == "")
+    var receiver = document.querySelector('.receiver');
+    if(receiver.value == "")
     {
     	$.alert("Please select receiver");
     }else{
@@ -160,7 +160,7 @@ if(selectedFile !== null)
         {
           formData.append("files[]", selectedFile.files[i]);
           formData.append("idU", idU);
-          formData.append("receiver", receiver);
+          formData.append("receiver", receiver.value);
         }
         else
         {
@@ -193,15 +193,15 @@ if(linkSended !== null)
   linkSended.addEventListener('click', function(e){
     e.preventDefault() ;
     var idU = document.querySelector('.idU').value;
-    var receiver = document.querySelector('.receiver').value;
-    if(receiver !== '')
-    {
+    var receiver = document.querySelector('.receiver');
+    // if(receiver.value !== '')
+    // {
       callSendedFile(idU, receiver) ;
-    }
-    else
-    {
-      $.alert('Please select receiver')
-    }
+    // }
+    // else
+    // {
+    //   $.alert('Please select receiver')
+    // }
     
   })
 }
@@ -210,8 +210,9 @@ function callReceiverFile(u,r,t)
 {
   var data = new FormData() ;
   data.append('idU', u)
-  data.append('receiver', r)
+  data.append('receiver', r.value)
   data.append('type',t) ;
+  data.append('target',r.options[r.selectedIndex].text)
   var xhr = new XMLHttpRequest() ;
   xhr.onreadystatechange = function()
   {
@@ -233,28 +234,28 @@ if(linkReceived !== null)
   linkReceived.addEventListener('click', function(e){
     e.preventDefault() ;
     var idU = document.querySelector('.idU').value;
-    var receiver = document.querySelector('.receiver').value;
-    if(receiver !== '')
-    {
+    var receiver = document.querySelector('.receiver');
+    // if(receiver.value !== '')
+    // {
       callReceiverFile(idU, receiver,'') ;
-    }
-    else
-    {
-      $.alert('Please select receiver')
-    }
+    // }
+    // else
+    // {
+    //   $.alert('Please select receiver')
+    // }
   })
 }
 
-var receiver = document.querySelector('.receiver')
-if(receiver !== null)
-{
-  receiver.addEventListener('change', function(e){
-    e.preventDefault() ;
-    var receive = this.options[this.selectedIndex].value ;
-    var idU = document.querySelector('.idU').value;
-    callSendedFile(idU, receive) ;
-  })
-}
+// var receiver = document.querySelector('.receiver')
+// if(receiver !== null)
+// {
+//   receiver.addEventListener('change', function(e){
+//     e.preventDefault() ;
+//     var receive = this.options[this.selectedIndex].value ;
+//     var idU = document.querySelector('.idU').value;
+//     callSendedFile(idU, receive) ;
+//   })
+// }
 
 // function downloadFile()
 // {
